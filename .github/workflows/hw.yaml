@@ -3,7 +3,7 @@ name: "Hello World by Github Actions"
 on:
     push:
         branches:
-            - main
+            - mains
             - demo
 
 jobs:
