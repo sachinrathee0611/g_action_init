@@ -24,14 +24,12 @@ jobs:
                 python -m pip install --upgrade pip
                 pip install -r requirements.txt
 
-            - name: Non-Duplicating the running application
+            - name: Restart the application service
               run: |
-                pkill -f "gunicorn" || echo "No duplicate process found"
-
-            - name: "Running the Python application using gunicorn"
-              run: |
-                nohup gunicorn -w 4 -b 0.0.0.0/0:5000 app:app > app.log 2>&1 &
-                sleep 10
+                sudo systemctl restart g_action_init
+                sudo systemctl enable g_action_init
 
             - name: "Testing the application"
-              run: curl http://127.0.0.1:5000
+              run: |
+                sleep 5  
+                curl http://127.0.0.1:5000
